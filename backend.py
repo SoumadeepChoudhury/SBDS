@@ -1,11 +1,23 @@
 from flask import Flask,request, render_template
 from flask_socketio import SocketIO
+import netifaces
 
 app = Flask(__name__,template_folder="./",static_folder="./",static_url_path="/")
 socketio = SocketIO(app,cors_allowed_origins="*")
 
 connectedDeviceList = {}
 connectedDeviceSIDList = {}
+
+def getLocalIP():
+    interfaces = netifaces.interfaces()
+    for iface in interfaces:
+        addrs = netifaces.ifaddresses(iface)
+        if netifaces.AF_INET in addrs:
+            for addr in addrs[netifaces.AF_INET]:
+                ip = addr['addr']
+                if not ip.startswith("127."):
+                    return ip
+    return '127.0.0.1' 
 
 def generateName(ip):
     names = ['Yessi', 'Azinel', 'Serce' ,'Brons' 'Pather' , 'Conda', 'Swift' , 'Bazix', 'Crons' , 'Denvo' ,  'Solix' , 'Mongo', 'Shivil', 'Kassey', 'Mevon', 'Geets', 'Vizel', 'Xonix', 'Debor', 'Kopeh', 'Luvm', 'Rexon', 'Hales', 'Felec'];
@@ -58,4 +70,5 @@ def getIp():
     return {'ip':client_ip,'name':generateName(client_ip)}
 
 if __name__ == "__main__":
-    socketio.run(app,host='0.0.0.0',port=39165,debug=True)
+    print(f"App Started at: http://{getLocalIP()}:39165")
+    socketio.run(app,host='0.0.0.0',port=39165)
