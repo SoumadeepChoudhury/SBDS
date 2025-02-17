@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBDS-Fast</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"
+        integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div style="display: flex; align-items: center;">
+        <h2>I am:&nbsp;</h2>
+        <span style="font-size: 20px;" id="selfDeviceName"></span>
+    </div>
+
+    <div id="devices">
+        <h1>Other Devices:</h1>
+    </div>
+    <input type="file" id="file" style="display: none;">
+    <!-- 📌 Overlay Container -->
+    <div class="overlay" id="fileOverlay">
+        <div class="overlay-content">
+            <h3>Receiving File...</h3>
+            <p id="fileName">File: </p>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./script.js"></script>
+
+</html>
